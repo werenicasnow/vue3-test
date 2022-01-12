@@ -1,0 +1,27 @@
+[
+  {
+    "projectId": "1",
+    "name": "Проект 1",
+    "costObject": "3DD-PP-S7"
+  },
+  {
+    "projectId": "2",
+    "name": "Проект 2",
+    "costObject": "3SE-FW-S7"
+  },
+  {
+    "projectId": "3",
+    "name": "Проект 3",
+    "costObject": "3QQ-RD-BP"
+  },
+  {
+    "projectId": "4",
+    "name": "Проект 4",
+    "costObject": "SOP-4W-QT"
+  },
+  {
+    "projectId": "5",
+    "name": "Проект 5",
+    "costObject": "STR-43-TY"
+  }
+]

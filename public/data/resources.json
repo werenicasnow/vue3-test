@@ -1,0 +1,58 @@
+[
+  {
+    "resourceId": "1",
+    "projectId": "3",
+    "position": "Разработчик",
+    "rateType": "opex",
+    "currentValue": "100"
+  },
+  {
+    "resourceId": "2",
+    "projectId": "1",
+    "position": "Аналитик",
+    "rateType": "opex",
+    "currentValue": "40"
+  },
+  {
+    "resourceId": "3",
+    "projectId": "1",
+    "position": "Менеджер",
+    "rateType": "opex",
+    "currentValue": "100"
+  },
+  {
+    "resourceId": "4",
+    "projectId": "1",
+    "position": "DevOps",
+    "rateType": "opex",
+    "currentValue": "100"
+  },
+  {
+    "resourceId": "5",
+    "projectId": "2",
+    "position": "Разработчик",
+    "rateType": "opex",
+    "currentValue": "10"
+  },
+  {
+    "resourceId": "6",
+    "projectId": "2",
+    "position": "Аналитик",
+    "rateType": "capex",
+    "currentValue": "100"
+  },
+  {
+    "resourceId": "7",
+    "projectId": "3",
+    "position": "Аналитик",
+    "rateType": "capex",
+    "currentValue": "100"
+  },
+  {
+    "resourceId": "8",
+    "projectId": "4",
+    "position": "Инженер",
+    "rateType": "opex",
+    "currentValue": "100"
+  }
+]
