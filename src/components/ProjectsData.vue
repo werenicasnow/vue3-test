@@ -10,7 +10,7 @@
             </div>
             <div class="card-content" v-if="project.projectId === idOpenProject">
                 <q-table
-                    :rows="users"
+                    :rows="userProjects"
                     :columns="columns"
                     row-key="name"
                     no-data-label="Нет данных"
@@ -82,8 +82,11 @@
 </style>
 
 <script>
-    import {defineComponent, ref, onMounted} from 'vue'
+    import {defineComponent, ref, onMounted, computed} from 'vue'
     import {usePersons} from "@/use/persons";
+    import {useStore} from 'vuex'
+    import {useProjects} from "@/use/projects";
+    import {useResources} from "@/use/resources";
 
     const columns = [
         {
@@ -106,35 +109,20 @@
                 page: 1,
                 rowsPerPage: 0 // 0 means all rows
             };
-
-            let persons = [];
+            const store = useStore();
+            const userProjects = ref([]);
 
             onMounted(async () => {
-                await loadProjects();
-                persons = await usePersons();
+                const {projects: projectsFromApi} = await useProjects();
+                const {persons: personsFromApi} = await usePersons();
+                const {resources :resourcesFromApi} = await useResources();
+
+                await store.dispatch('setProjects', projectsFromApi);
+                await store.dispatch('setPersons', personsFromApi);
+                await store.dispatch('setResources', resourcesFromApi);
             });
 
-            let users = ref([]);
-
-            let projects = ref([]);
-            async function loadProjects() {
-                const response = await fetch('data/projects.json', {
-                    'Content-Type': 'application/json'
-                });
-                projects.value = await response.json();
-            }
-
-            async function loadUsers(projectId) {
-                const response = await fetch('data/resources.json', {
-                    'Content-Type': 'application/json',
-                });
-                let allUsers = await response.json();
-                users.value = allUsers.filter(u => u.projectId === projectId);
-                users.value.forEach(u => {
-                    const userPerson = persons.persons.find(p => p.id === u.resourceId);
-                    u.name = userPerson.lastName + ' ' + userPerson.firstName + ' ' + (userPerson.middleName || '') + ' '
-                })
-            }
+            const projects = computed(() => store.getters.getProjects);
 
             let idOpenProject = ref(null);
             const toggleProject = (id) => {
@@ -142,7 +130,7 @@
                     idOpenProject.value = null
                 } else {
                     idOpenProject.value = id;
-                    loadUsers(id)
+                    userProjects.value = store.getters.projectsOfUser(id)
                 }
             };
 
@@ -152,7 +140,7 @@
                 toggleProject,
                 pagination,
                 projects,
-                users
+                userProjects
             }
         },
     })

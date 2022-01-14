@@ -1,13 +1,7 @@
 import {Ref} from 'vue'
+import {IPerson} from "@/store/modules/persons/types";
 
-interface Person {
-    id: number,
-    firstName: string,
-    lastName: string,
-    middleName: string,
-}
-
-type UsablePersons = Promise<{persons: Ref<Person[] | undefined>}>
+type UsablePersons = Promise<{persons: Ref<IPerson[] | undefined>}>
 
 export async function usePersons(): UsablePersons {
     const response = await fetch('data/persons.json');
